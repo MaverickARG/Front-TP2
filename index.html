@@ -1,81 +1,369 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trabajo Práctico: Evaluación de Agentes IA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Animaciones suaves adicionales */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VentaHard: venta de hardware de alta gama, armado de PCs a medida y servicio técnico especializado." />
+  <title>VentaHard | Hardware de alto rendimiento y servicios informáticos</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    referrerpolicy="no-referrer"
+  />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hard: {
+              black: "#05070A",
+              dark: "#08111D",
+              panel: "#0D1724",
+              panelSoft: "#121F2E",
+              cyan: "#00D9FF",
+              blue: "#2563EB",
+              green: "#9DFF3F",
+              silver: "#A8B7C7",
+              line: "#243244"
+            }
+          },
+          boxShadow: {
+            glow: "0 0 38px rgba(0, 217, 255, 0.28)",
+            softGlow: "0 0 32px rgba(157, 255, 63, 0.18)"
+          }
         }
-        .fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-        .delay-1 { animation-delay: 0.1s; opacity: 0; }
-        .delay-2 { animation-delay: 0.2s; opacity: 0; }
-        .delay-3 { animation-delay: 0.3s; opacity: 0; }
-    </style>
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background:
+        radial-gradient(circle at 15% 10%, rgba(0, 217, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 4%, rgba(157, 255, 63, 0.12), transparent 26%),
+        linear-gradient(180deg, #05070A 0%, #08111D 48%, #05070A 100%);
+    }
+
+    .tech-grid {
+      background-image:
+        linear-gradient(rgba(168, 183, 199, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 183, 199, 0.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 82%);
+    }
+
+    .glass {
+      background: rgba(13, 23, 36, 0.82);
+      border: 1px solid rgba(168, 183, 199, 0.16);
+      backdrop-filter: blur(18px);
+    }
+
+    .icon-chip {
+      color: #00D9FF;
+      text-shadow: 0 0 18px rgba(0, 217, 255, 0.6);
+    }
+
+    .icon-green {
+      color: #9DFF3F;
+      text-shadow: 0 0 18px rgba(157, 255, 63, 0.45);
+    }
+  </style>
 </head>
-<body class="min-h-screen bg-gray-900 text-gray-100 font-sans flex flex-col items-center justify-center p-6 selection:bg-blue-500 selection:text-white">
-    
-    <main class="w-full max-w-md bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-700/50 text-center relative overflow-hidden">
-        
-        <!-- Elementos decorativos de fondo -->
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"></div>
-        <div class="absolute -top-20 -left-20 w-40 h-40 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-        <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
 
-        <!-- Sección de Encabezado -->
-        <div class="mb-10 relative z-10 fade-in">
-            <div class="w-24 h-24 mx-auto bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg shadow-purple-500/30 mb-6 border-4 border-gray-800">
-                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
-                </svg>
+<body class="min-h-screen text-white antialiased selection:bg-hard-cyan selection:text-hard-black">
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-hard-black/85 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8" aria-label="Navegación principal">
+      <a href="#inicio" class="flex items-center gap-3" aria-label="Ir al inicio">
+        <span class="flex h-11 w-11 items-center justify-center rounded-lg border border-hard-cyan/40 bg-hard-cyan/10 shadow-glow">
+          <i class="fa-solid fa-microchip text-xl icon-chip" aria-hidden="true"></i>
+        </span>
+        <span class="text-2xl font-black tracking-wide">
+          Venta<span class="text-hard-cyan">Hard</span>
+        </span>
+      </a>
+
+      <input id="menu-toggle" type="checkbox" class="peer hidden" />
+      <label for="menu-toggle" class="cursor-pointer rounded-lg border border-white/15 px-3 py-2 text-hard-cyan md:hidden" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+      </label>
+
+      <div class="absolute left-0 right-0 top-full hidden border-b border-white/10 bg-hard-black/95 px-5 py-5 peer-checked:block md:static md:block md:border-0 md:bg-transparent md:p-0">
+        <ul class="flex flex-col gap-4 text-sm font-bold text-hard-silver md:flex-row md:items-center md:gap-7">
+          <li><a class="transition hover:text-hard-cyan" href="#inicio">Inicio</a></li>
+          <li><a class="transition hover:text-hard-cyan" href="#nosotros">Nosotros</a></li>
+          <li><a class="transition hover:text-hard-cyan" href="#servicios">Servicios</a></li>
+          <li><a class="transition hover:text-hard-cyan" href="#testimonios">Testimonios</a></li>
+          <li><a class="transition hover:text-hard-cyan" href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="relative overflow-hidden pt-28">
+      <div class="tech-grid pointer-events-none absolute inset-0"></div>
+
+      <div class="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+        <div class="relative z-10">
+          <p class="mb-5 inline-flex items-center gap-2 rounded-lg border border-hard-green/35 bg-hard-green/10 px-4 py-2 text-sm font-black text-hard-green">
+            <i class="fa-solid fa-bolt icon-green" aria-hidden="true"></i>
+            Hardware premium para equipos exigentes
+          </p>
+
+          <h1 class="max-w-4xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-7xl">
+            Llevá tu rendimiento tecnológico al próximo nivel.
+          </h1>
+
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-hard-silver">
+            En VentaHard vendemos componentes de alta gama, armamos PCs a medida y brindamos servicio técnico especializado para gamers, creadores de contenido, profesionales y empresas que necesitan equipos veloces, estables y confiables.
+          </p>
+
+          <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+            <a href="#contacto" class="inline-flex items-center justify-center gap-3 rounded-lg bg-hard-cyan px-7 py-4 text-base font-black text-hard-black shadow-glow transition hover:-translate-y-0.5 hover:bg-white">
+              Cotizar Equipamiento
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+
+            <a href="#servicios" class="inline-flex items-center justify-center gap-3 rounded-lg border border-white/15 px-7 py-4 text-base font-bold text-white transition hover:border-hard-green hover:text-hard-green">
+              Ver servicios
+              <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="relative z-10">
+          <div class="glass rounded-xl p-5 shadow-glow">
+            <div class="aspect-[4/3] overflow-hidden rounded-lg border border-white/10 bg-hard-panelSoft">
+              <img
+                src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=1200&q=85"
+                alt="Computadora gamer de alto rendimiento con componentes iluminados"
+                class="h-full w-full object-cover"
+              />
             </div>
-            <h1 class="text-2xl font-bold mb-1 tracking-tight text-white">Trabajo Práctico</h1>
-            <h2 class="text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-3">Evaluación de Agentes IA</h2>
-            <p class="text-sm text-gray-400 font-medium tracking-wide uppercase">Estudiante: [Tu Nombre]</p>
+
+            <div class="mt-5 grid grid-cols-3 gap-3 text-center">
+              <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+                <p class="text-2xl font-black text-hard-cyan">48h</p>
+                <p class="mt-1 text-xs font-semibold text-hard-silver">Armado express</p>
+              </div>
+              <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+                <p class="text-2xl font-black text-hard-green">100%</p>
+                <p class="mt-1 text-xs font-semibold text-hard-silver">Testeado</p>
+              </div>
+              <div class="rounded-lg border border-white/10 bg-white/[0.04] p-4">
+                <p class="text-2xl font-black text-white">24/7</p>
+                <p class="mt-1 text-xs font-semibold text-hard-silver">Soporte inicial</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros" class="border-y border-white/10 bg-hard-panel/70 py-20">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+        <div>
+          <p class="text-sm font-black uppercase tracking-[0.18em] text-hard-cyan">Nosotros</p>
+          <h2 class="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+            Soluciones informáticas pensadas para rendir hoy y escalar mañana.
+          </h2>
         </div>
 
-        <!-- Sección de Enlaces -->
-        <div class="flex flex-col space-y-4 relative z-10">
-            <!-- Botón 1 -->
-            <a href="prompt.txt" class="group relative block w-full py-4 px-6 bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 text-gray-200 hover:text-white font-medium rounded-2xl transition-all duration-300 ease-out transform hover:-translate-y-1 shadow-md hover:shadow-blue-500/25 fade-in delay-1">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500 to-blue-600 opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300"></div>
-                <span class="flex items-center justify-center gap-3">
-                    <svg class="w-5 h-5 text-blue-400 group-hover:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    Ver Prompt Utilizado
-                </span>
-            </a>
-            
-            <!-- Botón 2 -->
-            <a href="agentes/agent1.html" class="group relative block w-full py-4 px-6 bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-purple-500 text-gray-200 hover:text-white font-medium rounded-2xl transition-all duration-300 ease-out transform hover:-translate-y-1 shadow-md hover:shadow-purple-500/25 fade-in delay-2">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-500 to-purple-600 opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300"></div>
-                <span class="flex items-center justify-center gap-3">
-                    <svg class="w-5 h-5 text-purple-400 group-hover:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                    Landing Page - Agente 1 (Ej: Codex)
-                </span>
-            </a>
-            
-            <!-- Botón 3 -->
-            <a href="agentes/agent2.html" class="group relative block w-full py-4 px-6 bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-emerald-500 text-gray-200 hover:text-white font-medium rounded-2xl transition-all duration-300 ease-out transform hover:-translate-y-1 shadow-md hover:shadow-emerald-500/25 fade-in delay-3">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-500 to-emerald-600 opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300"></div>
-                <span class="flex items-center justify-center gap-3">
-                    <svg class="w-5 h-5 text-emerald-400 group-hover:text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                    Landing Page - Agente 2 (Ej: Cursor)
-                </span>
-            </a>
+        <div class="text-lg leading-8 text-hard-silver">
+          <p>
+            VentaHard combina asesoramiento técnico, selección precisa de componentes y experiencia real en armado, mantenimiento y optimización de equipos. Nuestra misión es que cada cliente invierta en tecnología compatible, potente y duradera, sin pagar de más por piezas que no necesita ni quedarse corto cuando el trabajo exige más rendimiento.
+          </p>
+          <p class="mt-5">
+            Trabajamos con PCs gamer, estaciones de trabajo, upgrades estratégicos, equipos para streaming, diseño, edición, renderizado y entornos empresariales. Cada configuración se revisa por compatibilidad, consumo, refrigeración, capacidad de expansión y estabilidad para que el resultado final sea rápido, confiable y listo para usar.
+          </p>
         </div>
-        
-    </main>
+      </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="mt-8 text-sm text-gray-500 fade-in delay-3">
-        Desarrollo Front End &copy; 2026
-    </footer>
+    <section id="servicios" class="py-20">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-black uppercase tracking-[0.18em] text-hard-green">Servicios</p>
+          <h2 class="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+            Todo lo necesario para comprar, armar y mantener tu equipo.
+          </h2>
+        </div>
 
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <article class="glass rounded-xl p-7 shadow-glow transition hover:-translate-y-1 hover:border-hard-cyan/60">
+            <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-lg bg-hard-cyan/12 ring-1 ring-hard-cyan/30">
+              <i class="fa-solid fa-memory text-3xl icon-chip" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-xl font-black">Venta de Componentes</h3>
+            <p class="mt-4 leading-7 text-hard-silver">
+              Procesadores, motherboards, placas de video, memorias DDR5, discos NVMe, fuentes certificadas, gabinetes con buen flujo de aire y periféricos premium.
+            </p>
+          </article>
+
+          <article class="glass rounded-xl p-7 shadow-softGlow transition hover:-translate-y-1 hover:border-hard-green/60">
+            <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-lg bg-hard-green/12 ring-1 ring-hard-green/30">
+              <i class="fa-solid fa-computer text-3xl icon-green" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-xl font-black">Armado de PCs a medida</h3>
+            <p class="mt-4 leading-7 text-hard-silver">
+              Diseñamos configuraciones según presupuesto, uso y objetivo: gaming competitivo, edición 4K, renderizado, streaming, oficina avanzada o workstation profesional.
+            </p>
+          </article>
+
+          <article class="glass rounded-xl p-7 shadow-glow transition hover:-translate-y-1 hover:border-hard-cyan/60">
+            <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-lg bg-hard-cyan/12 ring-1 ring-hard-cyan/30">
+              <i class="fa-solid fa-screwdriver-wrench text-3xl icon-chip" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-xl font-black">Servicio Técnico</h3>
+            <p class="mt-4 leading-7 text-hard-silver">
+              Diagnóstico, limpieza profunda, cambio de pasta térmica, optimización del sistema, actualización de BIOS y resolución de fallas de hardware.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios" class="border-y border-white/10 bg-hard-panel/70 py-20">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-black uppercase tracking-[0.18em] text-hard-cyan">Testimonios</p>
+          <h2 class="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+            Clientes que ya subieron de nivel con VentaHard.
+          </h2>
+        </div>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <article class="rounded-xl border border-white/10 bg-hard-black/45 p-7">
+            <div class="mb-4 flex gap-1 text-hard-green" aria-label="Calificación 5 estrellas">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <p class="leading-7 text-hard-silver">
+              “Compré una placa de video y una fuente certificada. Me guiaron con la compatibilidad, llegó todo perfecto y el equipo quedó rindiendo excelente en 1440p.”
+            </p>
+            <h3 class="mt-6 font-black text-white">Martín Salvatierra</h3>
+            <p class="text-sm text-hard-silver">Cliente gamer entusiasta</p>
+          </article>
+
+          <article class="rounded-xl border border-white/10 bg-hard-black/45 p-7">
+            <div class="mb-4 flex gap-1 text-hard-green" aria-label="Calificación 5 estrellas">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <p class="leading-7 text-hard-silver">
+              “Necesitaba una PC para edición de video y me armaron una configuración equilibrada. La entrega fue rápida y con pruebas de temperatura incluidas.”
+            </p>
+            <h3 class="mt-6 font-black text-white">Camila Ferraro</h3>
+            <p class="text-sm text-hard-silver">Editora audiovisual</p>
+          </article>
+
+          <article class="rounded-xl border border-white/10 bg-hard-black/45 p-7">
+            <div class="mb-4 flex gap-1 text-hard-green" aria-label="Calificación 5 estrellas">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <p class="leading-7 text-hard-silver">
+              “Llevé mi PC por reinicios aleatorios. Detectaron el problema de memoria, hicieron mantenimiento completo y en el mismo día ya estaba trabajando.”
+            </p>
+            <h3 class="mt-6 font-black text-white">Federico Lamas</h3>
+            <p class="text-sm text-hard-silver">Diseñador industrial</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="py-20">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+        <div>
+          <p class="text-sm font-black uppercase tracking-[0.18em] text-hard-green">Contacto</p>
+          <h2 class="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+            Contanos qué equipo necesitás y armamos una propuesta clara.
+          </h2>
+          <p class="mt-5 text-lg leading-8 text-hard-silver">
+            Pedí una cotización para upgrade, armado desde cero o diagnóstico técnico. Te respondemos con una recomendación compatible, equilibrada y ajustada a tu objetivo de rendimiento.
+          </p>
+
+          <div class="mt-8 space-y-4 text-hard-silver">
+            <p class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check icon-chip" aria-hidden="true"></i>
+              Asesoramiento antes de comprar
+            </p>
+            <p class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check icon-chip" aria-hidden="true"></i>
+              Componentes seleccionados por compatibilidad
+            </p>
+            <p class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check icon-chip" aria-hidden="true"></i>
+              Armado prolijo, testeado y listo para usar
+            </p>
+          </div>
+        </div>
+
+        <form class="glass rounded-xl p-6 shadow-glow sm:p-8" action="#" method="post">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="nombre" class="mb-2 block text-sm font-bold text-white">Nombre</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="name" class="w-full rounded-lg border border-white/10 bg-hard-black/70 px-4 py-3 text-white outline-none transition placeholder:text-hard-silver/70 focus:border-hard-cyan focus:ring-2 focus:ring-hard-cyan/25" placeholder="Tu nombre" />
+            </div>
+
+            <div>
+              <label for="correo" class="mb-2 block text-sm font-bold text-white">Correo</label>
+              <input id="correo" name="correo" type="email" autocomplete="email" class="w-full rounded-lg border border-white/10 bg-hard-black/70 px-4 py-3 text-white outline-none transition placeholder:text-hard-silver/70 focus:border-hard-cyan focus:ring-2 focus:ring-hard-cyan/25" placeholder="tu@email.com" />
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label for="asunto" class="mb-2 block text-sm font-bold text-white">Asunto</label>
+            <input id="asunto" name="asunto" type="text" class="w-full rounded-lg border border-white/10 bg-hard-black/70 px-4 py-3 text-white outline-none transition placeholder:text-hard-silver/70 focus:border-hard-cyan focus:ring-2 focus:ring-hard-cyan/25" placeholder="Cotización de PC, upgrade o servicio técnico" />
+          </div>
+
+          <div class="mt-5">
+            <label for="mensaje" class="mb-2 block text-sm font-bold text-white">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="6" class="w-full resize-none rounded-lg border border-white/10 bg-hard-black/70 px-4 py-3 text-white outline-none transition placeholder:text-hard-silver/70 focus:border-hard-cyan focus:ring-2 focus:ring-hard-cyan/25" placeholder="Contanos qué uso le vas a dar al equipo, presupuesto estimado y componentes actuales si ya tenés una PC."></textarea>
+          </div>
+
+          <button type="submit" class="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-lg bg-hard-green px-7 py-4 font-black text-hard-black shadow-softGlow transition hover:-translate-y-0.5 hover:bg-white">
+            Enviar Consulta
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 bg-hard-black py-8">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-5 text-center sm:flex-row sm:text-left lg:px-8">
+      <p class="text-sm text-hard-silver">
+        © 2026 VentaHard. Todos los derechos reservados.
+      </p>
+
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/gatocachirla/" target="_blank" rel="noopener noreferrer" class="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-hard-silver transition hover:border-hard-cyan hover:bg-hard-cyan/10 hover:text-hard-cyan" aria-label="Instagram de VentaHard">
+          <i class="fa-brands fa-instagram text-xl" aria-hidden="true"></i>
+        </a>
+
+        <a href="https://ar.linkedin.com/in/adrian-madro%C3%B1al-63a38480" target="_blank" rel="noopener noreferrer" class="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-hard-silver transition hover:border-hard-cyan hover:bg-hard-cyan/10 hover:text-hard-cyan" aria-label="LinkedIn de VentaHard">
+          <i class="fa-brands fa-linkedin-in text-xl" aria-hidden="true"></i>
+        </a>
+
+        <a href="#inicio" class="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-hard-silver transition hover:border-hard-green hover:bg-hard-green/10 hover:text-hard-green" aria-label="Volver al inicio">
+          <i class="fa-solid fa-arrow-up text-xl" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
