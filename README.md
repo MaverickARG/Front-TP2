@@ -1,10 +1,10 @@
 Adrian Madroñal 
 DNI 30826310
-Comision D 
+Comision Lunes
 
 1.- Link Vercel 
     https://frontendtp2-nine.vercel.app
-    
+
 
 
 2.- Prompt 
