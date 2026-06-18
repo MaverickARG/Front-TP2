@@ -1,12 +1,12 @@
-Adrian Madroñal <br>
-Comision Lunes <br>
+**Adrian Madroñal** <br>
+**Comision Lunes** <br>
 
-1.- Link Vercel <br>
+1.- **Link Vercel** <br>
     https://frontendtp2-nine.vercel.app
 
 
 
-2.- Prompt 
+2.- **Prompt**
 
 <role>
 Ponete en el rol de un Desarrollador Frontend Senior y Diseñador UX/UI
@@ -42,20 +42,20 @@ Devuelve únicamente el código fuente completo dentro de un bloque de código H
 </output_format>
 
 
-3.- Capturas
+3.- **Capturas**
 
-Landing<br>
+**Landing**<br>
 
 ![alt text](/assets/images/image-10.png)
 
-Agente 1 - Codex<br>
+**Agente 1 - Codex**<br>
 ![alt text](/assets/images/image-5.png)
 ![alt text](/assets/images/image-6.png)
 ![alt text](/assets/images/image-7.png)
 ![alt text](/assets/images/image-8.png)
 ![alt text](/assets/images/image-9.png)
 
-Agente 2 - Claude<br>
+**Agente 2 - Claude**<br>
 ![alt text](/assets/images/image.png)
 ![alt text](/assets/images/image-1.png)
 ![alt text](/assets/images/image-2.png)
