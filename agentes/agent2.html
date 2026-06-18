@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VentaHard — Hardware de Alta Gama y Servicio Técnico</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night:   '#0A0E1A',
+            surface: '#0F172A',
+            card:    '#131C30',
+            cyan:    '#00D4FF',
+            violet:  '#7C3AED',
+            slate:   '#94A3B8',
+          },
+          fontFamily: {
+            display: ['Rajdhani', 'sans-serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* ── Base ── */
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0A0E1A;
+      color: #F1F5F9;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── Grid circuito (hero bg) ── */
+    .circuit-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    /* Línea de escaneo animada */
+    .scanline {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0,212,255,.04) 50%,
+        transparent 100%
+      );
+      background-size: 100% 8px;
+      animation: scan 6s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes scan {
+      0%   { background-position: 0 -100%; }
+      100% { background-position: 0 200%; }
+    }
+
+    /* ── Nav link hover ── */
+    .nav-link {
+      position: relative;
+      color: #94A3B8;
+      transition: color .25s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -3px;
+      width: 0; height: 2px;
+      background: #00D4FF;
+      transition: width .3s ease;
+    }
+    .nav-link:hover { color: #00D4FF; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ── Glow CTA ── */
+    .btn-cta {
+      background: linear-gradient(135deg, #00D4FF 0%, #7C3AED 100%);
+      color: #0A0E1A;
+      font-weight: 700;
+      letter-spacing: .04em;
+      transition: box-shadow .3s, transform .2s;
+    }
+    .btn-cta:hover {
+      box-shadow: 0 0 24px rgba(0,212,255,.55), 0 0 48px rgba(124,58,237,.35);
+      transform: translateY(-2px);
+    }
+
+    /* ── Service card ── */
+    .service-card {
+      background: #131C30;
+      border: 1px solid rgba(0,212,255,.12);
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+    }
+    .service-card:hover {
+      border-color: rgba(0,212,255,.5);
+      box-shadow: 0 0 32px rgba(0,212,255,.12);
+      transform: translateY(-6px);
+    }
+
+    /* ── Testimonial card ── */
+    .testimonial-card {
+      background: #131C30;
+      border: 1px solid rgba(124,58,237,.18);
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .testimonial-card:hover {
+      border-color: rgba(124,58,237,.55);
+      box-shadow: 0 0 28px rgba(124,58,237,.12);
+    }
+
+    /* ── Form input ── */
+    .form-input {
+      background: #0F172A;
+      border: 1px solid rgba(0,212,255,.18);
+      color: #F1F5F9;
+      transition: border-color .3s, box-shadow .3s;
+      outline: none;
+    }
+    .form-input::placeholder { color: #475569; }
+    .form-input:focus {
+      border-color: #00D4FF;
+      box-shadow: 0 0 0 3px rgba(0,212,255,.12);
+    }
+
+    /* ── Glow icon ── */
+    .icon-glow { filter: drop-shadow(0 0 8px rgba(0,212,255,.7)); }
+
+    /* ── Section tag ── */
+    .section-tag {
+      display: inline-block;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      letter-spacing: .12em;
+      font-size: .7rem;
+      text-transform: uppercase;
+      color: #00D4FF;
+      border: 1px solid rgba(0,212,255,.3);
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+
+    /* ── Mobile menu ── */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: flex; }
+
+    /* ── Scroll fade-in ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Gradient accent text */
+    .text-gradient {
+      background: linear-gradient(90deg, #00D4FF 0%, #7C3AED 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+  <header id="inicio" class="fixed top-0 inset-x-0 z-50 border-b border-white/5"
+          style="background: rgba(10,14,26,.85); backdrop-filter: blur(16px);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#inicio" class="flex items-center gap-2">
+        <span class="text-cyan text-xl" style="font-family:'Rajdhani',sans-serif;">
+          <i class="fa-solid fa-microchip mr-1 icon-glow"></i>
+        </span>
+        <span class="font-display font-700 text-xl tracking-widest text-white" style="font-family:'Rajdhani',sans-serif; font-weight:700; letter-spacing:.1em;">
+          VENTA<span class="text-gradient">HARD</span>
+        </span>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#inicio"      class="nav-link text-sm font-medium">Inicio</a>
+        <a href="#nosotros"    class="nav-link text-sm font-medium">Nosotros</a>
+        <a href="#servicios"   class="nav-link text-sm font-medium">Servicios</a>
+        <a href="#testimonios" class="nav-link text-sm font-medium">Testimonios</a>
+        <a href="#contacto"    class="nav-link text-sm font-medium">Contacto</a>
+        <a href="#contacto"
+           class="btn-cta px-5 py-2 rounded text-sm">
+          Cotizar
+        </a>
+      </nav>
+
+      <!-- Hamburger -->
+      <button id="menu-btn" class="md:hidden text-slate focus:outline-none" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu"
+         class="md:hidden flex-col gap-1 px-6 pb-5 pt-2 border-t border-white/5"
+         style="background: rgba(10,14,26,.97);">
+      <a href="#inicio"      class="nav-link block py-2 text-sm">Inicio</a>
+      <a href="#nosotros"    class="nav-link block py-2 text-sm">Nosotros</a>
+      <a href="#servicios"   class="nav-link block py-2 text-sm">Servicios</a>
+      <a href="#testimonios" class="nav-link block py-2 text-sm">Testimonios</a>
+      <a href="#contacto"    class="nav-link block py-2 text-sm">Contacto</a>
+      <a href="#contacto"    class="btn-cta inline-block mt-3 px-5 py-2 rounded text-sm text-center">Cotizar</a>
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+
+    <!-- Fondo circuito -->
+    <div class="circuit-grid"></div>
+    <div class="scanline"></div>
+
+    <!-- Blob violeta -->
+    <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full opacity-20 pointer-events-none"
+         style="background: radial-gradient(circle, #7C3AED 0%, transparent 70%); filter: blur(64px);"></div>
+    <!-- Blob cian -->
+    <div class="absolute bottom-0 right-0 w-80 h-80 rounded-full opacity-15 pointer-events-none"
+         style="background: radial-gradient(circle, #00D4FF 0%, transparent 70%); filter: blur(64px);"></div>
+
+    <div class="relative max-w-4xl mx-auto px-6 text-center">
+      <span class="section-tag mb-6 inline-block">Hardware de Alta Gama · Buenos Aires</span>
+
+      <h1 class="font-display font-700 leading-tight mb-6"
+          style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:clamp(2.6rem,7vw,5.2rem); line-height:1.1;">
+        Potenciá tu infraestructura<br />
+        <span class="text-gradient">con componentes de élite.</span>
+      </h1>
+
+      <p class="text-slate max-w-2xl mx-auto mb-10"
+         style="font-size:clamp(1rem,2vw,1.2rem); line-height:1.7;">
+        Vendemos, configuramos y mantenemos equipos de alto rendimiento para profesionales,
+        estudios creativos y empresas que no admiten compromiso en velocidad ni confiabilidad.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#contacto"
+           class="btn-cta px-8 py-4 rounded text-base">
+          <i class="fa-solid fa-bolt mr-2"></i>Cotizar Equipamiento
+        </a>
+        <a href="#servicios"
+           class="px-8 py-4 rounded text-base border border-white/15 text-slate hover:border-cyan hover:text-cyan transition-colors">
+          Ver Servicios <i class="fa-solid fa-arrow-down ml-2"></i>
+        </a>
+      </div>
+
+      <!-- Stats rápidas -->
+      <div class="mt-20 grid grid-cols-3 gap-6 max-w-xl mx-auto">
+        <div>
+          <p class="font-display font-700 text-cyan text-3xl" style="font-family:'Rajdhani',sans-serif; font-weight:700;">+1200</p>
+          <p class="text-slate text-xs mt-1 uppercase tracking-widest">Equipos vendidos</p>
+        </div>
+        <div class="border-x border-white/10">
+          <p class="font-display font-700 text-cyan text-3xl" style="font-family:'Rajdhani',sans-serif; font-weight:700;">10 años</p>
+          <p class="text-slate text-xs mt-1 uppercase tracking-widest">En el mercado</p>
+        </div>
+        <div>
+          <p class="font-display font-700 text-cyan text-3xl" style="font-family:'Rajdhani',sans-serif; font-weight:700;">48 hs</p>
+          <p class="text-slate text-xs mt-1 uppercase tracking-widest">Tiempo de entrega</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicador scroll -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate animate-bounce">
+      <i class="fa-solid fa-chevron-down text-lg"></i>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════ ABOUT US ═══════════════════════════ -->
+  <section id="nosotros" class="py-28 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Texto -->
+      <div class="reveal">
+        <span class="section-tag mb-4">¿Quiénes somos?</span>
+        <h2 class="font-display font-700 text-white mb-6"
+            style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:clamp(2rem,4vw,2.8rem);">
+          Una década construyendo<br /><span class="text-gradient">máquinas que no fallan.</span>
+        </h2>
+        <p class="text-slate leading-relaxed mb-5">
+          VentaHard nació en 2014 con una premisa simple: el hardware que ponemos en manos de nuestros
+          clientes debe funcionar impecablemente desde el primer encendido hasta el último. No vendemos
+          cajas, entregamos rendimiento medible. Cada componente que comercializamos pasa por un
+          protocolo de verificación interno antes de salir de nuestro local.
+        </p>
+        <p class="text-slate leading-relaxed mb-5">
+          Trabajamos con las principales distribuidoras de AMD, Intel, NVIDIA y Corsair en Argentina,
+          lo que nos permite ofrecer precios competitivos sin resignar calidad ni garantía oficial.
+          Nuestro equipo está integrado por técnicos certificados con más de ocho años de experiencia
+          en diagnóstico, ensamblado y optimización de sistemas de alto rendimiento.
+        </p>
+        <p class="text-slate leading-relaxed">
+          Desde un estudio de diseño gráfico que necesita una workstation con carga de trabajo intensiva
+          en GPU, hasta una PyME que requiere servidores locales confiables, VentaHard tiene la
+          experiencia y el stock para dar respuesta en menos de 48 horas.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <div class="flex items-center gap-2 text-sm text-slate border border-white/10 rounded px-4 py-2">
+            <i class="fa-solid fa-shield-halved text-cyan"></i> Garantía oficial de fábrica
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate border border-white/10 rounded px-4 py-2">
+            <i class="fa-solid fa-headset text-cyan"></i> Soporte post-venta
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate border border-white/10 rounded px-4 py-2">
+            <i class="fa-solid fa-truck-fast text-cyan"></i> Envíos a todo el país
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual -->
+      <div class="reveal relative flex items-center justify-center">
+        <div class="absolute inset-0 rounded-2xl opacity-20"
+             style="background: radial-gradient(circle at center, #7C3AED 0%, transparent 70%); filter: blur(40px);"></div>
+        <div class="relative grid grid-cols-2 gap-4 w-full max-w-sm">
+          <!-- Tarjeta stat -->
+          <div class="service-card rounded-xl p-6 col-span-2 text-center">
+            <i class="fa-brands fa-nvidia text-4xl mb-3 icon-glow" style="color:#76b900;"></i>
+            <p class="text-white font-semibold text-sm">GPUs RTX 4000 / 5000 series</p>
+            <p class="text-slate text-xs mt-1">Stock permanente · Garantía 3 años</p>
+          </div>
+          <div class="service-card rounded-xl p-5 text-center">
+            <i class="fa-solid fa-memory text-3xl mb-2 text-cyan icon-glow"></i>
+            <p class="text-white font-semibold text-xs">RAM DDR5<br/>hasta 192 GB</p>
+          </div>
+          <div class="service-card rounded-xl p-5 text-center">
+            <i class="fa-solid fa-hard-drive text-3xl mb-2 text-violet-400 icon-glow" style="color:#a78bfa;"></i>
+            <p class="text-white font-semibold text-xs">NVMe PCIe 5.0<br/>hasta 14 GB/s</p>
+          </div>
+          <div class="service-card rounded-xl p-5 text-center col-span-2">
+            <i class="fa-solid fa-microchip text-3xl mb-2 icon-glow" style="color:#00D4FF;"></i>
+            <p class="text-white font-semibold text-xs">CPUs Intel Core Ultra &amp; AMD Ryzen 9000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════ SERVICES ═══════════════════════════ -->
+  <section id="servicios" class="py-28" style="background:#0A0E1A;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="section-tag mb-4">Nuestros servicios</span>
+        <h2 class="font-display font-700 text-white mt-4"
+            style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:clamp(2rem,4vw,2.8rem);">
+          Todo lo que tu sistema necesita,<br /><span class="text-gradient">en un solo lugar.</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Tarjeta 1 -->
+        <div class="service-card rounded-2xl p-8 reveal">
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
+               style="background: rgba(0,212,255,.1);">
+            <i class="fa-solid fa-server text-2xl icon-glow" style="color:#00D4FF;"></i>
+          </div>
+          <h3 class="font-display font-700 text-white text-xl mb-3"
+              style="font-family:'Rajdhani',sans-serif; font-weight:700;">
+            Venta de Componentes
+          </h3>
+          <p class="text-slate text-sm leading-relaxed">
+            Comercializamos CPUs, GPUs, motherboards, memorias RAM, almacenamiento NVMe y SSD,
+            fuentes de poder certificadas 80 Plus y gabinetes de alta airflow. Todo con facturación
+            oficial, garantía de fábrica y asesoramiento técnico incluido en la compra.
+          </p>
+          <ul class="mt-5 space-y-2 text-sm text-slate">
+            <li><i class="fa-solid fa-check text-cyan mr-2"></i>Marcas AMD, Intel, NVIDIA, Corsair, Kingston</li>
+            <li><i class="fa-solid fa-check text-cyan mr-2"></i>Stock actualizado semanalmente</li>
+            <li><i class="fa-solid fa-check text-cyan mr-2"></i>Compatibilidad verificada antes del envío</li>
+          </ul>
+        </div>
+
+        <!-- Tarjeta 2 — destacada -->
+        <div class="rounded-2xl p-8 reveal relative overflow-hidden"
+             style="background: linear-gradient(145deg, #131C30 0%, #1a1040 100%); border: 1px solid rgba(124,58,237,.4); box-shadow: 0 0 40px rgba(124,58,237,.15);">
+          <div class="absolute top-4 right-4 text-xs font-600 text-violet-300 border border-violet-500/40 px-2 py-1 rounded"
+               style="font-family:'Rajdhani',sans-serif; color:#c4b5fd; border-color:rgba(167,139,250,.4);">
+            MÁS SOLICITADO
+          </div>
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
+               style="background: rgba(124,58,237,.15);">
+            <i class="fa-solid fa-screwdriver-wrench text-2xl" style="color:#a78bfa; filter: drop-shadow(0 0 8px rgba(124,58,237,.7));"></i>
+          </div>
+          <h3 class="font-display font-700 text-white text-xl mb-3"
+              style="font-family:'Rajdhani',sans-serif; font-weight:700;">
+            Armado de PCs a Medida
+          </h3>
+          <p class="text-slate text-sm leading-relaxed">
+            Diseñamos y ensamblamos el equipo exacto que tu flujo de trabajo demanda. Analizamos
+            tu caso de uso —gaming competitivo, renderizado 3D, edición de video, desarrollo o
+            servidor— y seleccionamos los componentes que maximizan el rendimiento por peso invertido.
+          </p>
+          <ul class="mt-5 space-y-2 text-sm text-slate">
+            <li><i class="fa-solid fa-check mr-2" style="color:#a78bfa;"></i>Presupuesto sin compromiso en 24 hs</li>
+            <li><i class="fa-solid fa-check mr-2" style="color:#a78bfa;"></i>Testeo completo de estabilidad (24 h burn-in)</li>
+            <li><i class="fa-solid fa-check mr-2" style="color:#a78bfa;"></i>Instalación de SO y drivers optimizados</li>
+          </ul>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="service-card rounded-2xl p-8 reveal">
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
+               style="background: rgba(0,212,255,.1);">
+            <i class="fa-solid fa-magnifying-glass-chart text-2xl icon-glow" style="color:#00D4FF;"></i>
+          </div>
+          <h3 class="font-display font-700 text-white text-xl mb-3"
+              style="font-family:'Rajdhani',sans-serif; font-weight:700;">
+            Servicio Técnico
+          </h3>
+          <p class="text-slate text-sm leading-relaxed">
+            Diagnóstico y reparación de equipos de escritorio y notebooks con fallas de hardware
+            y software. Intervenimos en problemas de placa madre, overheating, corrosión por
+            líquido, fallas de RAM, disco dañado y recuperación de datos en medios con sectores
+            defectuosos.
+          </p>
+          <ul class="mt-5 space-y-2 text-sm text-slate">
+            <li><i class="fa-solid fa-check text-cyan mr-2"></i>Diagnóstico gratuito en 48 horas</li>
+            <li><i class="fa-solid fa-check text-cyan mr-2"></i>Presupuesto previo a toda intervención</li>
+            <li><i class="fa-solid fa-check text-cyan mr-2"></i>Garantía de 90 días en reparaciones</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════ TESTIMONIOS ═══════════════════════════ -->
+  <section id="testimonios" class="py-28 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="section-tag mb-4">Testimonios</span>
+        <h2 class="font-display font-700 text-white mt-4"
+            style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:clamp(2rem,4vw,2.8rem);">
+          Lo que dicen quienes<br /><span class="text-gradient">ya trabajan mejor.</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Testimonio 1 -->
+        <div class="testimonial-card rounded-2xl p-8 reveal">
+          <div class="flex gap-1 mb-4">
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+          </div>
+          <blockquote class="text-slate text-sm leading-relaxed mb-6">
+            "Armé con VentaHard una workstation con Ryzen 9 7950X y RTX 4090 para renders en
+            Cinema 4D. El equipo quedó estable al 100% desde el primer día. El asesoramiento fue
+            impecable: me explicaron cada decisión de componente y el por qué. Tardamos dos
+            días desde el presupuesto hasta la entrega en CABA. No vuelvo a armar un equipo solo."
+          </blockquote>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-700"
+                 style="background: linear-gradient(135deg,#7C3AED,#00D4FF); font-family:'Rajdhani',sans-serif; font-weight:700; color:#0A0E1A;">
+              FM
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium">Federico Molina</p>
+              <p class="text-slate text-xs">Director de arte — Estudio Pixel Norte</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonio 2 -->
+        <div class="testimonial-card rounded-2xl p-8 reveal">
+          <div class="flex gap-1 mb-4">
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+          </div>
+          <blockquote class="text-slate text-sm leading-relaxed mb-6">
+            "Llevé una notebook con falla de placa madre que otra técnica había declarado
+            irrecuperable. En VentaHard la diagnosticaron en 24 horas, me enviaron el
+            presupuesto detallado y en menos de una semana tenía el equipo funcionando
+            perfectamente. El precio fue muy justo y la comunicación durante todo el proceso
+            fue clara y constante. Garantía de 90 días que se cumple."
+          </blockquote>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-700"
+                 style="background: linear-gradient(135deg,#00D4FF,#7C3AED); font-family:'Rajdhani',sans-serif; font-weight:700; color:#0A0E1A;">
+              LR
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium">Luciana Rodríguez</p>
+              <p class="text-slate text-xs">Desarrolladora full-stack · Freelance</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonio 3 -->
+        <div class="testimonial-card rounded-2xl p-8 reveal">
+          <div class="flex gap-1 mb-4">
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star" style="color:#FBBF24;"></i>
+            <i class="fa-solid fa-star-half-stroke" style="color:#FBBF24;"></i>
+          </div>
+          <blockquote class="text-slate text-sm leading-relaxed mb-6">
+            "Compramos cuatro equipos Intel Core Ultra 9 para la sala de edición de nuestra
+            productora. VentaHard nos ofreció precio por volumen, los armaron con el mismo
+            esquema de hardware para facilitar el soporte, y los entregaron con Windows 11 Pro
+            ya activado y configurado. Llevan ocho meses de uso intensivo diario sin un solo
+            problema. Son nuestros proveedores exclusivos de hardware desde entonces."
+          </blockquote>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-700"
+                 style="background: linear-gradient(135deg,#7C3AED,#00D4FF); font-family:'Rajdhani',sans-serif; font-weight:700; color:#0A0E1A;">
+              MA
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium">Martín Aguirre</p>
+              <p class="text-slate text-xs">Productor ejecutivo — Frame Sur Productora</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════ CONTACTO ═══════════════════════════ -->
+  <section id="contacto" class="py-28" style="background:#0A0E1A;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-start">
+
+      <!-- Info lateral -->
+      <div class="reveal">
+        <span class="section-tag mb-4">Contacto</span>
+        <h2 class="font-display font-700 text-white mt-4 mb-6"
+            style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:clamp(2rem,4vw,2.8rem);">
+          Contanos qué necesitás.<br /><span class="text-gradient">Te respondemos en menos de 24 hs.</span>
+        </h2>
+        <p class="text-slate leading-relaxed mb-10">
+          Tanto si estás armando una PC desde cero, necesitás reponer un componente específico
+          o querés que revisemos un equipo con problemas, nuestro equipo técnico está disponible
+          para asesorarte sin compromiso.
+        </p>
+
+        <div class="space-y-5">
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                 style="background: rgba(0,212,255,.1);">
+              <i class="fa-solid fa-location-dot text-cyan"></i>
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium">Local comercial</p>
+              <p class="text-slate text-sm">Av. Rivadavia 4520, CABA — Lun a Vie 9:00 – 19:00 hs</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                 style="background: rgba(0,212,255,.1);">
+              <i class="fa-brands fa-whatsapp text-cyan"></i>
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium">WhatsApp comercial</p>
+              <p class="text-slate text-sm">+54 11 5555-4321</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                 style="background: rgba(0,212,255,.1);">
+              <i class="fa-solid fa-envelope text-cyan"></i>
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium">Email</p>
+              <p class="text-slate text-sm">ventas@ventahard.com.ar</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="reveal">
+        <div class="rounded-2xl p-8 lg:p-10"
+             style="background:#131C30; border:1px solid rgba(0,212,255,.12);">
+
+          <div class="grid sm:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label class="block text-slate text-xs uppercase tracking-wider mb-2">Nombre completo</label>
+              <input type="text" placeholder="Ej: Carlos García"
+                     class="form-input w-full rounded-lg px-4 py-3 text-sm" />
+            </div>
+            <div>
+              <label class="block text-slate text-xs uppercase tracking-wider mb-2">Correo electrónico</label>
+              <input type="email" placeholder="correo@empresa.com"
+                     class="form-input w-full rounded-lg px-4 py-3 text-sm" />
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <label class="block text-slate text-xs uppercase tracking-wider mb-2">Asunto</label>
+            <select class="form-input w-full rounded-lg px-4 py-3 text-sm cursor-pointer">
+              <option value="" disabled selected style="color:#475569; background:#0F172A;">Seleccioná el motivo de contacto</option>
+              <option value="componente" style="background:#0F172A;">Consulta por componente</option>
+              <option value="pc_medida" style="background:#0F172A;">Presupuesto PC a medida</option>
+              <option value="servicio_tecnico" style="background:#0F172A;">Servicio técnico</option>
+              <option value="volumen" style="background:#0F172A;">Compra por volumen / Empresa</option>
+              <option value="otro" style="background:#0F172A;">Otro</option>
+            </select>
+          </div>
+
+          <div class="mb-7">
+            <label class="block text-slate text-xs uppercase tracking-wider mb-2">Mensaje</label>
+            <textarea rows="5"
+                      placeholder="Describí tu necesidad con el mayor detalle posible (uso previsto, presupuesto aproximado, componentes actuales, etc.)"
+                      class="form-input w-full rounded-lg px-4 py-3 text-sm resize-none"></textarea>
+          </div>
+
+          <button type="button"
+                  class="btn-cta w-full py-4 rounded-lg text-base tracking-wide">
+            <i class="fa-solid fa-paper-plane mr-2"></i>Enviar Consulta
+          </button>
+
+          <p class="text-slate text-xs text-center mt-4">
+            <i class="fa-solid fa-lock mr-1"></i>
+            Tus datos son confidenciales y nunca son compartidos con terceros.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer class="border-t border-white/8 py-10"
+          style="background:#060911;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+
+      <!-- Logo -->
+      <a href="#inicio" class="flex items-center gap-2">
+        <i class="fa-solid fa-microchip icon-glow" style="color:#00D4FF;"></i>
+        <span class="font-display font-700 tracking-widest text-white text-lg"
+              style="font-family:'Rajdhani',sans-serif; font-weight:700; letter-spacing:.1em;">
+          VENTA<span class="text-gradient">HARD</span>
+        </span>
+      </a>
+
+      <!-- Copyright -->
+      <p class="text-slate text-xs text-center">
+        &copy; 2025 VentaHard. Todos los derechos reservados.<br class="sm:hidden" />
+        <span class="hidden sm:inline"> · </span>Diseñado y desarrollado en Argentina.
+      </p>
+
+      <!-- Redes -->
+      <div class="flex items-center gap-5">
+        <a href="https://www.instagram.com/gatocachirla/"
+           target="_blank" rel="noopener noreferrer"
+           class="text-slate hover:text-pink-400 transition-colors text-xl"
+           aria-label="Instagram de VentaHard">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://ar.linkedin.com/in/adrian-madro%C3%B1al-63a38480"
+           target="_blank" rel="noopener noreferrer"
+           class="text-slate hover:text-blue-400 transition-colors text-xl"
+           aria-label="LinkedIn de VentaHard">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="https://wa.me/5491155554321"
+           target="_blank" rel="noopener noreferrer"
+           class="text-slate hover:text-green-400 transition-colors text-xl"
+           aria-label="WhatsApp de VentaHard">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="mailto:ventas@ventahard.com.ar"
+           class="text-slate hover:text-cyan transition-colors text-xl"
+           aria-label="Email de VentaHard">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════ SCRIPTS ═══════════════════════════ -->
+  <script>
+    // ── Mobile menu toggle ──
+    const menuBtn  = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      menuBtn.querySelector('i').classList.toggle('fa-bars');
+      menuBtn.querySelector('i').classList.toggle('fa-xmark');
+    });
+
+    // Cerrar al hacer click en un enlace del menú móvil
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuBtn.querySelector('i').classList.add('fa-bars');
+        menuBtn.querySelector('i').classList.remove('fa-xmark');
+      });
+    });
+
+    // ── Scroll reveal ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Active nav link on scroll ──
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 80) current = s.id;
+      });
+      navLinks.forEach(link => {
+        link.style.color = '';
+        if (link.getAttribute('href') === `#${current}`) {
+          link.style.color = '#00D4FF';
+        }
+      });
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
