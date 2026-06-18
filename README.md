@@ -56,7 +56,7 @@ Agente 1 - Codex<br>
 ![alt text](/assets/images/image-8.png)
 ![alt text](/assets/images/image-9.png)
 
-Agente 2 - Claude<br>>
+Agente 2 - Claude<br>
 ![alt text](/assets/images/image.png)
 ![alt text](/assets/images/image-1.png)
 ![alt text](/assets/images/image-2.png)
