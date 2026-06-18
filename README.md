@@ -45,17 +45,18 @@ Devuelve únicamente el código fuente completo dentro de un bloque de código H
 
 3.- Capturas
 
-Landing
+Landing<br>
+
 ![alt text](/assets/images/image-10.png)
 
-Agente 1
+Agente 1 - Codex<br>
 ![alt text](/assets/images/image-5.png)
 ![alt text](/assets/images/image-6.png)
 ![alt text](/assets/images/image-7.png)
 ![alt text](/assets/images/image-8.png)
 ![alt text](/assets/images/image-9.png)
 
-Agente 2
+Agente 2 - Claude<br>>
 ![alt text](/assets/images/image.png)
 ![alt text](/assets/images/image-1.png)
 ![alt text](/assets/images/image-2.png)
