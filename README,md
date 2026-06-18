@@ -1,0 +1,62 @@
+Adrian Madroñal 
+DNI 30826310
+Comision D 
+
+1.- Link Vercel 
+
+2.- Prompt 
+
+<role>
+Ponete en el rol de un Desarrollador Frontend Senior y Diseñador UX/UI
+</role>
+
+<task>
+Tu objetivo es escribir el código completo, funcional y listo para producción de una Landing Page moderna, de alto impacto visual y 100% responsiva para "VentaHard", una empresa orientada a la venta de hardware de alta gama y servicios informáticos.
+</task>
+
+<context_and_rules>
+- Escribe el código completo en un único archivo `index.html`
+- Te pido que no utilices placeholders, textos de relleno (nada de relleno sin sentido) ni dejes partes incompletas con comentarios del tipo "<!-- tu código aquí -->". Redacta información real y coherente relacionado con el rubro hardware/sistemas
+- Utiliza HTML5 semántico
+- Utiliza Tailwind CSS para todos los estilos
+- Utiliza FontAwesome para los íconos y ten en cuenta los colores que elegiste para que se vean bien
+- La paleta de colores debe transmitir un ambiente tecnológico y moderno
+</context_and_rules>
+
+<structure>
+construye la página siguiendo exactamente este orden y requerimientos:
+
+1. HEADER: Logotipo en texto "VentaHard" y menú de navegación funcional con enlaces ancla suaves (smooth scroll) hacia las secciones: Inicio, Nosotros, Servicios, Testimonios y Contacto.
+2. HERO SECTION: Un título principal impactante orientado a potenciar el rendimiento tecnológico, un subtítulo sobre la venta de componentes y servicio técnico, y un botón CTA ("Cotizar Equipamiento") que lleve al formulario.
+3. ABOUT US: Un bloque de texto persuasivo que explique la misión de la empresa y su experiencia en soluciones informáticas
+4. SERVICES: Una cuadrícula (Grid) con 3 tarjetas (Venta de Componentes, Armado de PCs a medida, Servicio Técnico). Cada tarjeta debe incluir un ícono de FontAwesome, título y una breve descripción
+5. TESTIMONIALS: Tres reseñas de clientes destacando la calidad de los componentes y la rapidez del servicio. Incluye nombres ficticios y calificación por estrellas
+6. CONTACT: El maquetado visual completo de un formulario (Nombre, Correo, Asunto, Mensaje y botón "Enviar Consulta"). Solo necesito el diseño frontend, sin la funcionalidad del backend
+7. FOOTER: Derechos de autor y enlaces a redes sociales usando íconos de FontAwesome. Enlaza el ícono de Instagram a "https://www.instagram.com/gatocachirla/" y el de LinkedIn a "https://ar.linkedin.com/in/adrian-madro%C3%B1al-63a38480"
+</structure>
+
+<output_format>
+Devuelve únicamente el código fuente completo dentro de un bloque de código HTML. El resultado debe poder copiarse, pegarse y visualizarse directamente en el navegador sin que yo tenga que hacer ninguna modificación manual.
+</output_format>
+
+
+3.- Capturas
+
+Landing
+![alt text](/assets/images/image-10.png)
+
+Agente 1
+![alt text](/assets/images/image-5.png)
+![alt text](/assets/images/image-6.png)
+![alt text](/assets/images/image-7.png)
+![alt text](/assets/images/image-8.png)
+![alt text](/assets/images/image-9.png)
+
+Agente 2
+![alt text](/assets/images/image.png)
+![alt text](/assets/images/image-1.png)
+![alt text](/assets/images/image-2.png)
+![alt text](/assets/images/image-3.png)
+![alt text](/assets/images/image-4.png)
+
+
